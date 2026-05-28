@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <!-- Background Shield -->
+  <path d="M200 40 L340 90 L340 220 C340 310 230 360 200 380 C170 360 60 310 60 220 L60 90 Z" fill="url(#gradShield)" stroke="url(#gradStroke)" stroke-width="8" />
+  
+  <!-- Outer Glow / Detail -->
+  <path d="M200 55 L320 100 L320 215 C320 290 225 335 200 350 C175 335 80 290 80 215 L80 100 Z" fill="none" stroke="#22d3ee" stroke-width="4" opacity="0.6"/>
+
+  <!-- Book -->
+  <path d="M120 250 Q160 220 200 240 Q240 220 280 250 L280 270 Q240 240 200 260 Q160 240 120 270 Z" fill="#ffffff" />
+  <path d="M130 235 Q165 210 200 225 Q235 210 270 235 L270 245 Q235 220 200 235 Q165 220 130 245 Z" fill="#d8b4fe" />
+  
+  <!-- Center Star -->
+  <polygon points="200,120 215,160 260,160 225,185 240,225 200,200 160,225 175,185 140,160 185,160" fill="#22d3ee" />
+  
+  <!-- Text on Shield (Optional/Stylistic) -->
+  <text x="200" y="320" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle" letter-spacing="2">SDN RBU 05</text>
+
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="gradShield" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#9333ea;stop-opacity:1" /> <!-- Purple 600 -->
+      <stop offset="100%" style="stop-color:#4c1d95;stop-opacity:1" /> <!-- Purple 900 -->
+    </linearGradient>
+    <linearGradient id="gradStroke" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#22d3ee;stop-opacity:1" /> <!-- Cyan 400 -->
+      <stop offset="100%" style="stop-color:#db2777;stop-opacity:1" /> <!-- Pink 600 -->
+    </linearGradient>
+  </defs>
+</svg>
