@@ -9,16 +9,7 @@ export default function CekKelulusanPage() {
   const [searched, setSearched] = useState(false);
   const [result, setResult] = useState<any>(null);
 
-  // Dummy data
-  const dummyStudent = {
-    nisn: "123456789",
-    nama: "Budi Santoso",
-    tanggalLahir: "15 Agustus 2014",
-    guruKelas: "Ibu Siti Aminah, S.Pd",
-    status: "LULUS"
-  };
-
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!nisn.trim()) return;
 
@@ -26,16 +17,34 @@ export default function CekKelulusanPage() {
     setSearched(false);
     setResult(null);
 
-    // Simulate network delay
-    setTimeout(() => {
+    try {
+      const response = await fetch('/data_siswa.json');
+      const data = await response.json();
+      const student = data.find((s: any) => s.NISN === nisn);
+
+      // Simulate network delay for UX
+      setTimeout(() => {
+        setLoading(false);
+        setSearched(true);
+        if (student) {
+          setResult({
+            nisn: student.NISN,
+            nama: student["Nama Lengkap"],
+            tanggalLahir: student["Tempat Tanggal Lahir"],
+            guruKelas: student["Guru Kelas"],
+            kelas: student["Kelas"],
+            status: "LULUS"
+          });
+        } else {
+          setResult(null);
+        }
+      }, 1000);
+    } catch (error) {
+      console.error("Error fetching data:", error);
       setLoading(false);
       setSearched(true);
-      if (nisn === dummyStudent.nisn) {
-        setResult(dummyStudent);
-      } else {
-        setResult(null);
-      }
-    }, 1200);
+      setResult(null);
+    }
   };
 
   return (
@@ -116,10 +125,14 @@ export default function CekKelulusanPage() {
                       <p className="font-bold text-lg text-foreground">{result.nisn}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-foreground/60 mb-1">Tanggal Lahir</p>
+                      <p className="text-sm text-foreground/60 mb-1">Tempat, Tanggal Lahir</p>
                       <p className="font-bold text-lg text-foreground">{result.tanggalLahir}</p>
                     </div>
                     <div>
+                      <p className="text-sm text-foreground/60 mb-1">Kelas</p>
+                      <p className="font-bold text-lg text-foreground">{result.kelas}</p>
+                    </div>
+                    <div className="sm:col-span-2">
                       <p className="text-sm text-foreground/60 mb-1">Guru Kelas</p>
                       <p className="font-bold text-lg text-foreground">{result.guruKelas}</p>
                     </div>
